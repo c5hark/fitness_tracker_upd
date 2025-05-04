@@ -1,9 +1,31 @@
 package actioninfo
 
+import (
+	"log"
+)
+
 type DataParser interface {
-	// TODO: добавить методы
+	Parse(data string) error
+	ActionInfo() (string, error)
 }
 
 func Info(dataset []string, dp DataParser) {
-	// TODO: реализовать функцию
+	if len(dataset) == 0 {
+		return
+	}
+
+	for _, data := range dataset {
+		err := dp.Parse(data)
+		if err != nil {
+			log.Println("parsing error: ", err)
+			continue
+		}
+
+		info, err := dp.ActionInfo()
+		if err != nil {
+			log.Println("error getting information: ", err)
+			continue
+		}
+		log.Println(info)
+	}
 }
