@@ -25,7 +25,7 @@ func (ds *DaySteps) Parse(datastring string) (err error) {
 
 	ds.Steps, err = strconv.Atoi(sliceData[0])
 	if err != nil {
-		return errors.New("invalid integer format: falied to convert the number of steps to an integer")
+		return err
 	}
 	if ds.Steps <= 0 {
 		return errors.New("invalid count of steps: steps must be greater than zero")
@@ -33,7 +33,7 @@ func (ds *DaySteps) Parse(datastring string) (err error) {
 
 	ds.Duration, err = time.ParseDuration(sliceData[1])
 	if err != nil {
-		return errors.New("invalid duration format: falied to parse duration as time.Duration")
+		return err
 	}
 	if ds.Duration <= 0 {
 		return errors.New("invalid duration format: time of time.Duration must be greater than zero")

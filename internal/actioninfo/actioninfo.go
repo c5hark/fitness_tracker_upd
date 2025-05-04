@@ -20,10 +20,12 @@ func Info(dataset []string, dp DataParser) {
 			log.Println("parsing error: ", err)
 			continue
 		}
+
+		info, err := dp.ActionInfo()
+		if err != nil {
+			log.Println("error getting information: ", err)
+			continue
+		}
+		log.Println(info)
 	}
-	info, err := dp.ActionInfo()
-	if err != nil {
-		log.Println("error getting information: ", err)
-	}
-	log.Println(info)
 }
